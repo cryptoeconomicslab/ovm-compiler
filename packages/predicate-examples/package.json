@@ -1,11 +1,14 @@
 {
-  "name": "predicate-examples",
+  "name": "@cryptoeconomicslab/predicate-examples",
   "version": "0.2.9",
   "description": "Predicate examples",
   "main": "index.js",
   "directories": {
     "test": "test",
     "contracts": "contracts"
+  },
+  "publishConfig": {
+    "access": "restricted"
   },
   "scripts": {
     "prettier": "prettier --write 'contracts/**/*.sol' --loglevel error",
