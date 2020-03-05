@@ -1,7 +1,7 @@
 {
   "name": "@cryptoeconomicslab/ovm-ethereum-generator",
   "version": "0.2.9",
-  "description": "OVM transpiler",
+  "description": "OVM evm bytecode generator",
   "author": {
     "name": "Cryptoeconomics Lab",
     "url": "https://www.cryptoeconomicslab.com/"
@@ -22,30 +22,13 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc --build",
+    "build": "mkdir -p build && waffle waffle-config.json && tsc --build && npm run build:property",
     "build:check": "tsc --noEmit",
-    "test": "jest --passWithNoTests",
+    "test": "mocha --require ts-node/register '__test__/**/*.test.ts'",
+    "build:property": "node lib/compile.js",
     "lint": "eslint --ext ts,tsx src",
     "doc": "typedoc --out docs src",
     "clean": "rm -rf lib docs"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testMatch": [
-      "**/__tests__/**/?(*.)+(spec|test).(ts|js)",
-      "**/?(*.)+(spec|test).ts"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "ts"
-    ],
-    "globals": {
-      "ts-jest": {
-        "tsConfig": "tsconfig.json"
-      }
-    }
   },
   "dependencies": {
     "@cryptoeconomicslab/ovm-generator": "^0.2.9",
@@ -54,5 +37,16 @@
     "@cryptoeconomicslab/ovm-transpiler": "^0.2.9",
     "solc": "^0.5.15",
     "tslib": "^1.10.0"
+  },
+  "devDependencies": {
+    "@cryptoeconomicslab/ovm-ethereum-generator": "^0.2.9",
+    "@cryptoeconomicslab/ovm-parser": "^0.2.5",
+    "@cryptoeconomicslab/ovm-transpiler": "^0.2.9",
+    "@types/chai": "^4.2.5",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "ethereum-waffle": "^2.1.0",
+    "ethers": "^4.0.33",
+    "mocha": "^6.2.0"
   }
 }

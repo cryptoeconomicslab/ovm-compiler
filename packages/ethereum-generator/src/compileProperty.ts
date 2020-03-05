@@ -1,4 +1,4 @@
-import { generateEVMByteCode } from '@cryptoeconomicslab/ovm-ethereum-generator'
+import { generateEVMByteCode } from './'
 import { transpile } from '@cryptoeconomicslab/ovm-transpiler'
 import { Import, Parser } from '@cryptoeconomicslab/ovm-parser'
 import fs from 'fs'

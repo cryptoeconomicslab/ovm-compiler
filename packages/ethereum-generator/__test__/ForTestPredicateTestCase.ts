@@ -1,6 +1,6 @@
-import * as ForTest from '../../build/ForTest.json'
+import * as ForTest from '../build/ForTest.json'
 import { ethers } from 'ethers'
-import { encodeLabel, encodeProperty } from '../../src/utils'
+import { encodeLabel, encodeProperty } from '../src/helper'
 
 const transactionA = '0x000001'
 const transactionB = '0x000002'
