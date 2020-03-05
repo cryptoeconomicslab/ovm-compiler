@@ -5,17 +5,16 @@ import {
   encodeString,
   encodeProperty,
   encodeVariable,
-  encodeInteger
+  encodeInteger,
+  TestCaseSet,
+  TestContext
 } from '../src/helper'
 
 const transactionA = '0x000001'
 const transactionB = '0x000002'
 const signature = '0x000003'
 
-export const createAndTestCase = (
-  [notAddress, andAddress, forAllSuchThatAddress]: string[],
-  wallet: ethers.Wallet
-) => {
+export const createAndTestCase = (wallet: ethers.Wallet): TestCaseSet => {
   return {
     name: 'AndTest',
     contract: AndTest,
@@ -24,36 +23,32 @@ export const createAndTestCase = (
       {
         name:
           'isValidChallenge of And logical connective and ThereExistsSuchThat quantifier',
-        challengeInput: [encodeInteger(1)],
-        getProperty: (
+        getTestCase: (
           andTestPredicate: ethers.Contract,
-          compiledPredicate: ethers.Contract
+          context: TestContext
         ) => {
           return {
-            predicateAddress: andTestPredicate.address,
-            inputs: [encodeLabel('AndTestA'), transactionA, transactionB]
-          }
-        },
-        getChallenge: (
-          andTestPredicate: ethers.Contract,
-          mockAtomicPredicateAddress: string,
-          compiledPredicate: ethers.Contract
-        ) => {
-          return {
-            predicateAddress: forAllSuchThatAddress,
-            inputs: [
-              '0x',
-              encodeString('v0'),
-              encodeProperty({
-                predicateAddress: notAddress,
-                inputs: [
-                  encodeProperty({
-                    predicateAddress: mockAtomicPredicateAddress,
-                    inputs: [transactionA, transactionB, encodeVariable('v0')]
-                  })
-                ]
-              })
-            ]
+            challengeInputs: [encodeInteger(1)],
+            property: {
+              predicateAddress: andTestPredicate.address,
+              inputs: [encodeLabel('AndTestA'), transactionA, transactionB]
+            },
+            challenge: {
+              predicateAddress: context.forAllSuchThat,
+              inputs: [
+                '0x',
+                encodeString('v0'),
+                encodeProperty({
+                  predicateAddress: context.not,
+                  inputs: [
+                    encodeProperty({
+                      predicateAddress: context.mockAtomicPredicate,
+                      inputs: [transactionA, transactionB, encodeVariable('v0')]
+                    })
+                  ]
+                })
+              ]
+            }
           }
         }
       }
@@ -62,7 +57,10 @@ export const createAndTestCase = (
     decideTrueTestCases: [
       {
         name: 'AndTestA',
-        createParameters: (compiledPredicate: ethers.Contract) => {
+        getTestCase: (
+          andTestPredicate: ethers.Contract,
+          context: TestContext
+        ) => {
           return {
             inputs: [encodeLabel('AndTestA'), transactionA, transactionB],
             witnesses: ['0x', signature]
@@ -73,7 +71,10 @@ export const createAndTestCase = (
     invalidDecideTestCases: [
       {
         name: 'invalid AndTestA',
-        createParameters: (compiledPredicate: ethers.Contract) => {
+        getTestCase: (
+          andTestPredicate: ethers.Contract,
+          context: TestContext
+        ) => {
           return {
             inputs: [encodeLabel('AndTestA'), transactionB],
             witnesses: [signature]

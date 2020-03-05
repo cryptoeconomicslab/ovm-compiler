@@ -1,33 +1,37 @@
 import { ethers } from 'ethers'
 import { OvmProperty } from './utils'
 
-export interface ChallengeTestCase {
+export interface TestCase<T> {
   name: string
-  challengeInput?: string[]
-  getProperty: (
-    ownershipPredicate: ethers.Contract,
-    compiledPredicate: ethers.Contract
-  ) => OvmProperty
-  getChallenge: (
-    ownershipPredicate: ethers.Contract,
-    mockAtomicPredicateAddress: string,
-    compiledPredicate: ethers.Contract
-  ) => OvmProperty
+  getTestCase: (targetPredicate: ethers.Contract, context: TestContext) => T
 }
 
-export interface DecideTestCase {
-  name: string
-  createParameters: (
-    compiledPredicate: ethers.Contract
-  ) => { inputs: string[]; witnesses: string[] }
+export interface ChallengeTestData {
+  challengeInputs: string[]
+  property: OvmProperty
+  challenge: OvmProperty
 }
 
-export interface TestCase {
+export interface DecideTestData {
+  inputs: string[]
+  witnesses: string[]
+}
+
+export interface TestContext {
+  forAllSuchThat: string
+  and: string
+  not: string
+  mockAtomicPredicate: string
+  mockCompiledPredicate: string
+  payout: string
+}
+
+export interface TestCaseSet {
   name: string
   contract: any
   extraArgs: string[]
-  validChallenges: ChallengeTestCase[]
-  invalidChallenges: ChallengeTestCase[]
-  decideTrueTestCases: DecideTestCase[]
-  invalidDecideTestCases: DecideTestCase[]
+  validChallenges: TestCase<ChallengeTestData>[]
+  invalidChallenges: TestCase<ChallengeTestData>[]
+  decideTrueTestCases: TestCase<DecideTestData>[]
+  invalidDecideTestCases: TestCase<DecideTestData>[]
 }
