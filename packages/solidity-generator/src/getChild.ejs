@@ -27,16 +27,16 @@
 <%      if(item.isCompiled) { -%>
             bytes[] memory childInputs = new bytes[](<%= item.inputs.length %>);
 <%- indent(include('constructInputs', {property: item, valName: 'childInputs', witnessName: 'challengeInputs[0]'}), 4) -%>
-            return getChild<%= item.predicate.source %>(utils.subArray(childInputs, 1, childInputs.length), utils.subArray(challengeInputs, 1, challengeInputs.length));
+            return getChild(childInputs, utils.subArray(challengeInputs, 1, challengeInputs.length));
 <%      } else { -%>
 <%-  indent(include('constructProperty', {property: item, valName: 'notInputs[0]', propIndex: j, freeVariable: false}), 4) -%>
+            return types.Property({
+                predicateAddress: notAddress,
+                inputs: notInputs
+            });
 <%      } -%>
         }
 <%    } -%>
-        return types.Property({
-            predicateAddress: notAddress,
-            inputs: notInputs
-        });
 <%  } else if(property.connective == 'ForAllSuchThat') {
       const quantifier = property.inputs[0];
       const innerProperty = property.inputs[2];
@@ -44,7 +44,7 @@
 <%    if(innerProperty.isCompiled) { -%>
         bytes[] memory childInputs = new bytes[](<%= innerProperty.inputs.length %>);
 <%- include('constructInputs', {property: innerProperty, valName: 'childInputs', witnessName: 'challengeInputs[0]'}) -%>
-        return getChild<%= innerProperty.predicate.source %>(utils.subArray(childInputs, 1, childInputs.length), utils.subArray(challengeInputs, 1, challengeInputs.length));
+        return getChild(childInputs, utils.subArray(challengeInputs, 1, challengeInputs.length));
 <%    } else { -%>
         bytes[] memory notInputs = new bytes[](1);
 <%-  include('constructProperty', {property: innerProperty, valName: 'notInputs[0]', propIndex: '', freeVariable: false}) -%>

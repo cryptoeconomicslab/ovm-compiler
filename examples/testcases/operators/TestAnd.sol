@@ -94,8 +94,9 @@ contract AndTest {
             return getChildAndTestA(inputs, challengeInput);
         }
         bytes32 input0 = keccak256(utils.getInputValue(inputs[0]));
+        bytes[] memory subInputs = utils.subArray(inputs, 1, inputs.length);
         if(input0 == keccak256(AndTestA)) {
-            return getChildAndTestA(utils.subArray(inputs, 1, inputs.length), challengeInput);
+            return getChildAndTestA(subInputs, challengeInput);
         }
     }
 
@@ -107,8 +108,9 @@ contract AndTest {
             return decideAndTestA(_inputs, _witness);
         }
         bytes32 input0 = keccak256(utils.getInputValue(_inputs[0]));
+        bytes[] memory subInputs = utils.subArray(_inputs, 1, _inputs.length);
         if(input0 == keccak256(AndTestA)) {
-            return decideAndTestA(utils.subArray(_inputs, 1, _inputs.length), _witness);
+            return decideAndTestA(subInputs, _witness);
         }
     }
 
@@ -136,6 +138,10 @@ contract AndTest {
                 inputs: childInputsOf0
             }));
 
+            return types.Property({
+                predicateAddress: notAddress,
+                inputs: notInputs
+            });
         }
         if(challengeInput == 1) {
             bytes[] memory childInputsOf1 = new bytes[](1);
@@ -146,11 +152,11 @@ contract AndTest {
                 inputs: childInputsOf1
             }));
 
+            return types.Property({
+                predicateAddress: notAddress,
+                inputs: notInputs
+            });
         }
-        return types.Property({
-            predicateAddress: notAddress,
-            inputs: notInputs
-        });
     }
     /**
      * Decides AndTestA(AndTestA,a,b).

@@ -14,6 +14,10 @@
                 inputs: childInputsOf0
             }));
 
+            return types.Property({
+                predicateAddress: notAddress,
+                inputs: notInputs
+            });
         }
         if(challengeInput == 1) {
             bytes[] memory childInputsOf1 = new bytes[](1);
@@ -24,9 +28,9 @@
                 inputs: childInputsOf1
             }));
 
+            return types.Property({
+                predicateAddress: notAddress,
+                inputs: notInputs
+            });
         }
-        return types.Property({
-            predicateAddress: notAddress,
-            inputs: notInputs
-        });
     }
