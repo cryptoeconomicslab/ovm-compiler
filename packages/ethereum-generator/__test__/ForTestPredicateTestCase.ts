@@ -15,7 +15,7 @@ export const createForTestCase = (wallet: ethers.Wallet) => {
       {
         name:
           'isValidChallenge of ForAllSuchThat quantifier and Or logical connective',
-        getTestCase: (
+        getTestData: (
           forTestPredicate: ethers.Contract,
           context: TestContext
         ) => {
@@ -58,7 +58,7 @@ export const createForTestCase = (wallet: ethers.Wallet) => {
       },
       {
         name: 'isValidChallenge of Not logocal connective',
-        getTestCase: (
+        getTestData: (
           forTestPredicate: ethers.Contract,
           context: TestContext
         ) => {

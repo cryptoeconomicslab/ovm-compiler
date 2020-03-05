@@ -73,7 +73,7 @@ export function setUpTest(
         describe('isValidChallenge', () => {
           testcase.validChallenges.forEach(validChallenge => {
             it(validChallenge.name, async () => {
-              const challengeTestCase = validChallenge.getTestCase(
+              const challengeTestCase = validChallenge.getTestData(
                 targetPredicate,
                 testContext
               )
@@ -88,7 +88,7 @@ export function setUpTest(
 
           testcase.invalidChallenges.forEach(invalidChallenge => {
             it(invalidChallenge.name, async () => {
-              const challengeTestCase = invalidChallenge.getTestCase(
+              const challengeTestCase = invalidChallenge.getTestData(
                 targetPredicate,
                 testContext
               )
@@ -106,7 +106,7 @@ export function setUpTest(
         describe('decide', () => {
           testcase.decideTrueTestCases.forEach(decideTrueTestCase => {
             it(decideTrueTestCase.name, async () => {
-              const decideTestCase = decideTrueTestCase.getTestCase(
+              const decideTestCase = decideTrueTestCase.getTestData(
                 targetPredicate,
                 testContext
               )
@@ -120,7 +120,7 @@ export function setUpTest(
 
           testcase.invalidDecideTestCases.forEach(decideTrueTestCase => {
             it(decideTrueTestCase.name, async () => {
-              const decideTestCase = decideTrueTestCase.getTestCase(
+              const decideTestCase = decideTrueTestCase.getTestData(
                 targetPredicate,
                 testContext
               )

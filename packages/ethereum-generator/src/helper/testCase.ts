@@ -3,7 +3,7 @@ import { OvmProperty } from './utils'
 
 export interface TestCase<T> {
   name: string
-  getTestCase: (targetPredicate: ethers.Contract, context: TestContext) => T
+  getTestData: (targetPredicate: ethers.Contract, context: TestContext) => T
 }
 
 export interface ChallengeTestData {

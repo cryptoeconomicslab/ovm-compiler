@@ -23,7 +23,7 @@ export const createAndTestCase = (wallet: ethers.Wallet): TestCaseSet => {
       {
         name:
           'isValidChallenge of And logical connective and ThereExistsSuchThat quantifier',
-        getTestCase: (
+        getTestData: (
           andTestPredicate: ethers.Contract,
           context: TestContext
         ) => {
@@ -57,7 +57,7 @@ export const createAndTestCase = (wallet: ethers.Wallet): TestCaseSet => {
     decideTrueTestCases: [
       {
         name: 'AndTestA',
-        getTestCase: (
+        getTestData: (
           andTestPredicate: ethers.Contract,
           context: TestContext
         ) => {
@@ -71,7 +71,7 @@ export const createAndTestCase = (wallet: ethers.Wallet): TestCaseSet => {
     invalidDecideTestCases: [
       {
         name: 'invalid AndTestA',
-        getTestCase: (
+        getTestData: (
           andTestPredicate: ethers.Contract,
           context: TestContext
         ) => {
