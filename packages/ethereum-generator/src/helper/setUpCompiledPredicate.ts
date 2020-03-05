@@ -25,7 +25,7 @@ export async function setUpCompiledPredicate(
       testContext.and,
       testContext.forAllSuchThat
     ].concat(testCase.extraArgs),
-    { gasLimit: 5000000 }
+    { gasLimit: testContext.gasLimit }
   )
   await targetPredicate.setPredicateAddresses(
     testContext.mockAtomicPredicate,

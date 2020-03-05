@@ -24,6 +24,7 @@ export interface TestContext {
   mockAtomicPredicate: string
   mockCompiledPredicate: string
   payout: string
+  gasLimit: number
 }
 
 export interface TestCaseSet {

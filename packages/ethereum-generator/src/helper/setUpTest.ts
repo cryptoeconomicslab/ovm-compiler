@@ -8,13 +8,18 @@ chai.use(solidity)
 chai.use(require('chai-as-promised'))
 const { expect, assert } = chai
 
+export interface SetUpOptions {
+  gasLimit: number
+}
+
 export function setUpTest(
   name: string,
   createTestCases: (wallet: ethers.Wallet) => TestCaseSet[],
   MockAtomicPredicate: any,
   MockCompiledPredicate: any,
   Utils: any,
-  MockAdjudicationContract: any
+  MockAdjudicationContract: any,
+  options: SetUpOptions = { gasLimit: 6_000_000 }
 ) {
   describe(name, () => {
     let provider = createMockProvider()
@@ -45,7 +50,8 @@ export function setUpTest(
         forAllSuchThat: forAllSuchThatAddress,
         mockAtomicPredicate: mockAtomicPredicate.address,
         mockCompiledPredicate: mockCompiledPredicate.address,
-        payout: ownershipPayout
+        payout: ownershipPayout,
+        gasLimit: options.gasLimit
       }
     })
 
