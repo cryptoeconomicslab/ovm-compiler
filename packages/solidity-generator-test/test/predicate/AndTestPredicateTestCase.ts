@@ -1,4 +1,4 @@
-import * as AndTest from '../../build/contracts/AndTest.json'
+import * as AndTest from '../../build/AndTest.json'
 import { ethers } from 'ethers'
 import {
   encodeLabel,
@@ -6,7 +6,8 @@ import {
   encodeProperty,
   encodeVariable,
   encodeInteger
-} from '../helpers/utils'
+} from '../../src/utils'
+import { load } from '../helpers/load'
 
 const transactionA = '0x000001'
 const transactionB = '0x000002'

@@ -6,13 +6,7 @@ import path from 'path'
 import { AbiCoder } from 'ethers/utils'
 const abi = new AbiCoder()
 
-compileAllSourceFiles(
-  path.join(__dirname, '../../../contracts/predicate')
-).then(() => {
-  console.log('all compiled')
-})
-
-async function compileAllSourceFiles(targetDir: string) {
+export async function compileAllSourceFiles(targetDir: string) {
   const files = fs.readdirSync(targetDir)
 
   await Promise.all(
@@ -22,7 +16,7 @@ async function compileAllSourceFiles(targetDir: string) {
         const contractName = path.basename(f, ext)
         const result = await compile(targetDir, contractName)
         fs.writeFileSync(
-          path.join(__dirname, `../../../build/contracts/${contractName}.json`),
+          path.join(__dirname, `../build/${contractName}.json`),
           result
         )
       }
@@ -30,7 +24,7 @@ async function compileAllSourceFiles(targetDir: string) {
   )
 }
 
-async function compile(
+export async function compile(
   basePath: string,
   contractName: string
 ): Promise<string> {

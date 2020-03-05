@@ -11,8 +11,18 @@ import * as MockAtomicPredicate from '../../build/contracts/MockAtomicPredicate.
 import * as MockCompiledPredicate from '../../build/contracts/MockCompiledPredicate.json'
 import * as Utils from '../../build/contracts/Utils.json'
 import * as ethers from 'ethers'
-import { randomAddress } from '../helpers/utils'
-import { createTestCases } from './testcase'
+import { randomAddress } from '../../src/utils'
+import { createAndTestCase } from './AndTestPredicateTestCase'
+import { createForTestCase } from './ForTestPredicateTestCase'
+import { TestCase } from '../../src'
+
+const createTestCases: (
+  logicalConnectives: string[],
+  wallet: ethers.Wallet
+) => TestCase[] = (logicalConnectives: string[], wallet: ethers.Wallet) => [
+  createAndTestCase(logicalConnectives, wallet),
+  createForTestCase(logicalConnectives, wallet)
+]
 
 chai.use(solidity)
 chai.use(require('chai-as-promised'))

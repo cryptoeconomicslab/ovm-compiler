@@ -1,9 +1,7 @@
 import { ethers } from 'ethers'
-import { OvmProperty } from '../helpers/utils'
-import { createAndTestCase } from './AndTestPredicateTestCase'
-import { createForTestCase } from './ForTestPredicateTestCase'
+import { OvmProperty } from './utils'
 
-interface ChallengeTestCase {
+export interface ChallengeTestCase {
   name: string
   challengeInput?: string[]
   getProperty: (
@@ -17,14 +15,14 @@ interface ChallengeTestCase {
   ) => OvmProperty
 }
 
-interface DecideTestCase {
+export interface DecideTestCase {
   name: string
   createParameters: (
     compiledPredicate: ethers.Contract
   ) => { inputs: string[]; witnesses: string[] }
 }
 
-interface TestCase {
+export interface TestCase {
   name: string
   contract: any
   extraArgs: string[]
@@ -33,11 +31,3 @@ interface TestCase {
   decideTrueTestCases: DecideTestCase[]
   invalidDecideTestCases: DecideTestCase[]
 }
-
-export const createTestCases: (
-  logicalConnectives: string[],
-  wallet: ethers.Wallet
-) => TestCase[] = (logicalConnectives: string[], wallet: ethers.Wallet) => [
-  createAndTestCase(logicalConnectives, wallet),
-  createForTestCase(logicalConnectives, wallet)
-]
