@@ -69,3 +69,12 @@ export function encodeAddress(address: string) {
 export function randomAddress() {
   return hexlify(randomBytes(20))
 }
+
+/**
+ * encode witnesses for And logical connective's children
+ * Please see P_0 ∧ P_1 in https://github.com/cryptoeconomicslab/ovm-plasma-chamber-spec/blob/387767f5783639737f298cbae24e477f286d5b9e/core-spec/index.md#immediately-decide-table
+ * @param witnesses witnesses for And logical connective's children
+ */
+export function encodeChildWitnesses(witnesses: string[]) {
+  return abi.encode(['bytes[]'], [witnesses])
+}

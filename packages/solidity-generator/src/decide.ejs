@@ -24,7 +24,7 @@
 <%      if(item.isCompiled) { -%>
             bytes[] memory childInputs<%= index %> = new bytes[](<%= item.inputs.length %>);
 <%- include('constructInputs', {property: item, valName: 'childInputs' + index, witnessName: '_witness[0]'}) -%>
-        require(decide(childInputs<%= index %>,  utils.subArray(_witness, 1, _witness.length)));
+        require(decide(childInputs<%= index %>,  abi.decode(_witness[<%= index %>], (bytes[]))));
 <%      } else { %>
 <%- include('decideProperty', {propIndex: index, property: item, valName: 'childInputs' + index}) -%>
 <%      } %>
