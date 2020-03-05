@@ -97,7 +97,7 @@ contract <%= claimDef.name %> {
         bytes[] memory _inputs,
         bytes[] memory _challengeInput,
         types.Property memory _challenge
-    ) public returns (bool) {
+    ) public view returns (bool) {
         require(
             keccak256(abi.encode(getChild(_inputs, _challengeInput))) == keccak256(abi.encode(_challenge)),
             "_challenge must be valud child of game tree"
@@ -108,7 +108,7 @@ contract <%= claimDef.name %> {
     function getChild(
         bytes[] memory inputs,
         bytes[] memory challengeInput
-    ) private returns (types.Property memory) {
+    ) private view returns (types.Property memory) {
         if(!utils.isLabel(inputs[0])) {
             return getChild<%= claimDef.entryPoint %>(inputs, challengeInput);
         }

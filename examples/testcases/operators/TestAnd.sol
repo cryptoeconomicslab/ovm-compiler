@@ -78,7 +78,7 @@ contract AndTest {
         bytes[] memory _inputs,
         bytes[] memory _challengeInput,
         types.Property memory _challenge
-    ) public returns (bool) {
+    ) public view returns (bool) {
         require(
             keccak256(abi.encode(getChild(_inputs, _challengeInput))) == keccak256(abi.encode(_challenge)),
             "_challenge must be valud child of game tree"
@@ -89,7 +89,7 @@ contract AndTest {
     function getChild(
         bytes[] memory inputs,
         bytes[] memory challengeInput
-    ) private returns (types.Property memory) {
+    ) private view returns (types.Property memory) {
         if(!utils.isLabel(inputs[0])) {
             return getChildAndTestA(inputs, challengeInput);
         }
@@ -124,7 +124,7 @@ contract AndTest {
     /**
      * Gets child of AndTestA(AndTestA,a,b).
      */
-    function getChildAndTestA(bytes[] memory _inputs, bytes[] memory challengeInputs) private returns (types.Property memory) {
+    function getChildAndTestA(bytes[] memory _inputs, bytes[] memory challengeInputs) private view returns (types.Property memory) {
         uint256 challengeInput = abi.decode(challengeInputs[0], (uint256));
         bytes[] memory notInputs = new bytes[](1);
         if(challengeInput == 0) {

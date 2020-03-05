@@ -78,7 +78,7 @@ contract OrTest {
         bytes[] memory _inputs,
         bytes[] memory _challengeInput,
         types.Property memory _challenge
-    ) public returns (bool) {
+    ) public view returns (bool) {
         require(
             keccak256(abi.encode(getChild(_inputs, _challengeInput))) == keccak256(abi.encode(_challenge)),
             "_challenge must be valud child of game tree"
@@ -89,7 +89,7 @@ contract OrTest {
     function getChild(
         bytes[] memory inputs,
         bytes[] memory challengeInput
-    ) private returns (types.Property memory) {
+    ) private view returns (types.Property memory) {
         if(!utils.isLabel(inputs[0])) {
             return getChildOrTestO(inputs, challengeInput);
         }
@@ -124,7 +124,7 @@ contract OrTest {
     /**
      * Gets child of OrTestO(OrTestO,a,b).
      */
-    function getChildOrTestO(bytes[] memory _inputs, bytes[] memory challengeInputs) private returns (types.Property memory) {
+    function getChildOrTestO(bytes[] memory _inputs, bytes[] memory challengeInputs) private view returns (types.Property memory) {
 
         bytes[] memory andInputs = new bytes[](2);
         bytes[] memory notInputs0 = new bytes[](1);

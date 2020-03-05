@@ -1,7 +1,7 @@
     /**
      * Gets child of EvalTestA(EvalTestA,a,b).
      */
-    function getChildEvalTestA(bytes[] memory _inputs, bytes[] memory challengeInputs) private returns (types.Property memory) {
+    function getChildEvalTestA(bytes[] memory _inputs, bytes[] memory challengeInputs) private view returns (types.Property memory) {
         uint256 challengeInput = abi.decode(challengeInputs[0], (uint256));
         bytes[] memory notInputs = new bytes[](1);
         if(challengeInput == 0) {
