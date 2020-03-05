@@ -24,7 +24,7 @@ export async function setUpCompiledPredicate(
       testContext.not,
       testContext.and,
       testContext.forAllSuchThat
-    ].concat(testCase.extraArgs),
+    ].concat(testCase.getExtraArgs(testContext)),
     { gasLimit: testContext.gasLimit }
   )
   await targetPredicate.setPredicateAddresses(

@@ -30,7 +30,7 @@ export interface TestContext {
 export interface TestCaseSet {
   name: string
   contract: any
-  extraArgs: string[]
+  getExtraArgs: (context: TestContext) => string[]
   validChallenges: TestCase<ChallengeTestData>[]
   invalidChallenges: TestCase<ChallengeTestData>[]
   decideTrueTestCases: TestCase<DecideTestData>[]

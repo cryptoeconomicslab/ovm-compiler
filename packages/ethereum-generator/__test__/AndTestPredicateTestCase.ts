@@ -18,7 +18,7 @@ export const createAndTestCase = (wallet: ethers.Wallet): TestCaseSet => {
   return {
     name: 'AndTest',
     contract: AndTest,
-    extraArgs: [],
+    getExtraArgs: (context: TestContext) => [],
     validChallenges: [
       {
         name:

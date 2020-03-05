@@ -10,7 +10,7 @@ export const createForTestCase = (wallet: ethers.Wallet) => {
   return {
     name: 'ForTest',
     contract: ForTest,
-    extraArgs: [],
+    getExtraArgs: (context: TestContext) => [],
     validChallenges: [
       {
         name:
