@@ -1,7 +1,7 @@
     /**
      * Gets child of BindValTestT(BindValTestT,a).
      */
-    function getChildBindValTestT(bytes[] memory _inputs, bytes[] memory challengeInputs) private returns (types.Property memory) {
+    function getChildBindValTestT(bytes[] memory _inputs, bytes[] memory challengeInputs) private view returns (types.Property memory) {
         bytes[] memory forAllSuchThatInputs = new bytes[](3);
         bytes[] memory notInputs = new bytes[](1);
         bytes[] memory childInputsOf = new bytes[](2);

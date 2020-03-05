@@ -1,7 +1,7 @@
     /**
      * Gets child of Bind2TestA(Bind2TestA,a).
      */
-    function getChildBind2TestA(bytes[] memory _inputs, bytes[] memory challengeInputs) private returns (types.Property memory) {
+    function getChildBind2TestA(bytes[] memory _inputs, bytes[] memory challengeInputs) private view returns (types.Property memory) {
         types.Property memory inputProperty1 = abi.decode(_inputs[0], (types.Property));
         types.Property memory inputProperty1Child1 = abi.decode(inputProperty1.inputs[1], (types.Property));
         uint256 challengeInput = abi.decode(challengeInputs[0], (uint256));

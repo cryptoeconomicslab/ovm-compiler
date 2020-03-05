@@ -1,7 +1,7 @@
     /**
      * Gets child of ThereValTestT(ThereValTestT,a).
      */
-    function getChildThereValTestT(bytes[] memory _inputs, bytes[] memory challengeInputs) private returns (types.Property memory) {
+    function getChildThereValTestT(bytes[] memory _inputs, bytes[] memory challengeInputs) private view returns (types.Property memory) {
         bytes[] memory forAllSuchThatInputs = new bytes[](3);
         bytes[] memory notInputs = new bytes[](1);
         types.Property memory inputPredicateProperty = abi.decode(_inputs[0], (types.Property));

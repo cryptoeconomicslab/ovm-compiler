@@ -1,7 +1,7 @@
     /**
      * Gets child of <%= property.name %>(<%= property.inputDefs %>).
      */
-    function getChild<%= property.name %>(bytes[] memory _inputs, bytes[] memory challengeInputs) private returns (types.Property memory) {
+    function getChild<%= property.name %>(bytes[] memory _inputs, bytes[] memory challengeInputs) private view returns (types.Property memory) {
 <%
         property.propertyInputs.forEach((propertyInput, index) => {
 -%>
