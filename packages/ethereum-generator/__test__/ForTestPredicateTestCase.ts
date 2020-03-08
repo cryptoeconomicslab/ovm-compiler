@@ -6,15 +6,17 @@ const transactionA = '0x000001'
 const transactionB = '0x000002'
 const signature = '0x000003'
 
-export const createForTestCase = (wallet: ethers.Wallet) => {
+export const createTestCaseOfForAllSuchThatQuantifier = (
+  wallet: ethers.Wallet
+) => {
   return {
-    name: 'ForTest',
+    name: 'SignedBy(a, b).all(c -> IsValidSignature(a, b, c))',
     contract: ForTest,
     getExtraArgs: (context: TestContext) => [],
     validChallenges: [
       {
         name:
-          'isValidChallenge of ForAllSuchThat quantifier and Or logical connective',
+          'valid challenge of ForTestF(a, b, c) should be !ForTestFO1N(a, b, c) and !IsValidSignature(a, b, c)',
         getTestData: (
           forTestPredicate: ethers.Contract,
           context: TestContext
@@ -57,7 +59,8 @@ export const createForTestCase = (wallet: ethers.Wallet) => {
         }
       },
       {
-        name: 'isValidChallenge of Not logocal connective',
+        name:
+          'valid challenge of ForTestFO1N(a, b, c) should be IsValidSignature(a, b, c)',
         getTestData: (
           forTestPredicate: ethers.Contract,
           context: TestContext

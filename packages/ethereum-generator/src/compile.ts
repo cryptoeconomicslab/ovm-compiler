@@ -1,3 +1,4 @@
+// This is compile script to compile all files in "contracts/predicate"
 import path from 'path'
 import { compileAllSourceFiles } from './compileProperty'
 

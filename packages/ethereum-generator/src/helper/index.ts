@@ -1,4 +1,4 @@
 export * from './testCase'
 export * from './utils'
-export * from './setUpTest'
-export * from './setUpCompiledPredicate'
+export * from './setUpCompiledPredicateTest'
+export * from './deployCompiledPredicate'

@@ -2,7 +2,7 @@ import { deployContract } from 'ethereum-waffle'
 import ethers from 'ethers'
 import { TestCaseSet, TestContext } from './testCase'
 
-export async function setUpCompiledPredicate(
+export async function deployCompiledPredicate(
   wallet: ethers.Wallet,
   Utils: any,
   AdjudicationContract: any,

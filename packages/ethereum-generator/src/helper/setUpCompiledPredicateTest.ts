@@ -1,25 +1,25 @@
 import chai from 'chai'
 import { ethers } from 'ethers'
 import { createMockProvider, deployContract, solidity } from 'ethereum-waffle'
-import { randomAddress, setUpCompiledPredicate } from './'
+import { randomAddress, deployCompiledPredicate } from '.'
 import { TestCaseSet, TestContext } from './testCase'
 
 chai.use(solidity)
 chai.use(require('chai-as-promised'))
 const { expect, assert } = chai
 
-export interface SetUpOptions {
+export interface SetUpCompiledPredicateTestOptions {
   gasLimit: number
 }
 
-export function setUpTest(
+export function setUpCompiledPredicateTest(
   name: string,
   createTestCases: (wallet: ethers.Wallet) => TestCaseSet[],
   MockAtomicPredicate: any,
   MockCompiledPredicate: any,
   Utils: any,
   MockAdjudicationContract: any,
-  options: SetUpOptions = { gasLimit: 6_000_000 }
+  options: SetUpCompiledPredicateTestOptions = { gasLimit: 6_000_000 }
 ) {
   describe(name, () => {
     let provider = createMockProvider()
@@ -61,7 +61,7 @@ export function setUpTest(
       describe(testcase.name, () => {
         let targetPredicate: ethers.Contract
         beforeEach(async () => {
-          targetPredicate = await setUpCompiledPredicate(
+          targetPredicate = await deployCompiledPredicate(
             wallet,
             Utils,
             MockAdjudicationContract,

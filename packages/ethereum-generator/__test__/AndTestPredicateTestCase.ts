@@ -14,15 +14,17 @@ const transactionA = '0x000001'
 const transactionB = '0x000002'
 const signature = '0x000003'
 
-export const createAndTestCase = (wallet: ethers.Wallet): TestCaseSet => {
+export const createTestCaseOfAndLogicalConnective = (
+  wallet: ethers.Wallet
+): TestCaseSet => {
   return {
-    name: 'AndTest',
+    name: 'SignedBy(txA, txB).any() and SignedBy(txA, txB).any()',
     contract: AndTest,
     getExtraArgs: (context: TestContext) => [],
     validChallenges: [
       {
         name:
-          'isValidChallenge of And logical connective and ThereExistsSuchThat quantifier',
+          'valid challenge of SignedBy(a, b).any() and SignedBy(a, b).any() should be Bytes().all(v0 -> !IsValidSignature(a, b, v0))',
         getTestData: (
           andTestPredicate: ethers.Contract,
           context: TestContext
@@ -56,7 +58,7 @@ export const createAndTestCase = (wallet: ethers.Wallet): TestCaseSet => {
     invalidChallenges: [],
     decideTrueTestCases: [
       {
-        name: 'AndTestA',
+        name: 'should be true',
         getTestData: (
           andTestPredicate: ethers.Contract,
           context: TestContext
@@ -70,7 +72,7 @@ export const createAndTestCase = (wallet: ethers.Wallet): TestCaseSet => {
     ],
     invalidDecideTestCases: [
       {
-        name: 'invalid AndTestA',
+        name: 'should throw exception',
         getTestData: (
           andTestPredicate: ethers.Contract,
           context: TestContext

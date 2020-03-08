@@ -6,12 +6,18 @@ export interface TestCase<T> {
   getTestData: (targetPredicate: ethers.Contract, context: TestContext) => T
 }
 
-export interface ChallengeTestData {
+/**
+ * isValidChallenge method confirms `challenge` is valid challenge of `property` using `challengeInputs`
+ */
+export interface IsValidChallengeTestData {
   challengeInputs: string[]
   property: OvmProperty
   challenge: OvmProperty
 }
 
+/**
+ * decide method succeeds when a property which has `inputs` can prove true using `witnesses`
+ */
 export interface DecideTestData {
   inputs: string[]
   witnesses: string[]
@@ -31,8 +37,8 @@ export interface TestCaseSet {
   name: string
   contract: any
   getExtraArgs: (context: TestContext) => string[]
-  validChallenges: TestCase<ChallengeTestData>[]
-  invalidChallenges: TestCase<ChallengeTestData>[]
+  validChallenges: TestCase<IsValidChallengeTestData>[]
+  invalidChallenges: TestCase<IsValidChallengeTestData>[]
   decideTrueTestCases: TestCase<DecideTestData>[]
   invalidDecideTestCases: TestCase<DecideTestData>[]
 }
