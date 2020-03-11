@@ -19,8 +19,12 @@ export const createTestCaseOfAndLogicalConnective = (
 ): TestCaseSet => {
   return {
     name: 'SignedBy(txA, txB).any() and SignedBy(txA, txB).any()',
-    contract: AndTest,
-    getExtraArgs: (context: TestContext) => [],
+    deploy: [
+      {
+        contract: AndTest,
+        getExtraArgs: (context: TestContext) => []
+      }
+    ],
     validChallenges: [
       {
         name:

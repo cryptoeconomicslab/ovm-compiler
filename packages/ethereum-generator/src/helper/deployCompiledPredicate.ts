@@ -15,29 +15,34 @@ export async function deployCompiledPredicate(
     AdjudicationContract,
     [false]
   )
-  const targetPredicate = await deployContract(
-    wallet,
-    testCase.contract,
-    [
-      adjudicationContract.address,
-      utils.address,
-      testContext.not,
-      testContext.and,
-      testContext.forAllSuchThat
-    ].concat(testCase.getExtraArgs(testContext)),
-    { gasLimit: testContext.gasLimit }
-  )
-  await targetPredicate.setPredicateAddresses(
-    testContext.mockAtomicPredicate,
-    testContext.mockAtomicPredicate,
-    testContext.mockAtomicPredicate,
-    testContext.mockAtomicPredicate,
-    testContext.mockAtomicPredicate,
-    testContext.mockAtomicPredicate,
-    testContext.mockAtomicPredicate,
-    testContext.mockAtomicPredicate,
-    testContext.mockAtomicPredicate,
-    testContext.payout
-  )
+  let targetPredicate: ethers.Contract | undefined
+  for await (const d of testCase.deploy) {
+    targetPredicate = await deployContract(
+      wallet,
+      d.contract,
+      [
+        adjudicationContract.address,
+        utils.address,
+        testContext.not,
+        testContext.and,
+        testContext.forAllSuchThat
+      ].concat(d.getExtraArgs(testContext)),
+      { gasLimit: testContext.gasLimit }
+    )
+    testContext.deployedContractAddresses.push(targetPredicate.address)
+    await targetPredicate.setPredicateAddresses(
+      testContext.mockAtomicPredicate,
+      testContext.mockAtomicPredicate,
+      testContext.mockAtomicPredicate,
+      testContext.mockAtomicPredicate,
+      testContext.mockAtomicPredicate,
+      testContext.mockAtomicPredicate,
+      testContext.mockAtomicPredicate,
+      testContext.mockAtomicPredicate,
+      testContext.mockAtomicPredicate,
+      testContext.payout
+    )
+  }
+  if (!targetPredicate) throw new Error('testCase.deploy must not be empty')
   return targetPredicate
 }

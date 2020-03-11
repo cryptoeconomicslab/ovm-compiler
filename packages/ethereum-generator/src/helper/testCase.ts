@@ -31,12 +31,15 @@ export interface TestContext {
   mockCompiledPredicate: string
   payout: string
   gasLimit: number
+  deployedContractAddresses: string[]
 }
 
 export interface TestCaseSet {
   name: string
-  contract: any
-  getExtraArgs: (context: TestContext) => string[]
+  deploy: {
+    contract: any
+    getExtraArgs: (context: TestContext) => string[]
+  }[]
   validChallenges: TestCase<IsValidChallengeTestData>[]
   invalidChallenges: TestCase<IsValidChallengeTestData>[]
   decideTrueTestCases: TestCase<DecideTestData>[]

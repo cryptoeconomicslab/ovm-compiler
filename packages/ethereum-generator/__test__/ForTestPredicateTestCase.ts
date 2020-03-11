@@ -11,8 +11,12 @@ export const createTestCaseOfForAllSuchThatQuantifier = (
 ) => {
   return {
     name: 'SignedBy(a, b).all(c -> IsValidSignature(a, b, c))',
-    contract: ForTest,
-    getExtraArgs: (context: TestContext) => [],
+    deploy: [
+      {
+        contract: ForTest,
+        getExtraArgs: (context: TestContext) => []
+      }
+    ],
     validChallenges: [
       {
         name:

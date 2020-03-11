@@ -51,7 +51,8 @@ export function setUpCompiledPredicateTest(
         mockAtomicPredicate: mockAtomicPredicate.address,
         mockCompiledPredicate: mockCompiledPredicate.address,
         payout: ownershipPayout,
-        gasLimit: options.gasLimit
+        gasLimit: options.gasLimit,
+        deployedContractAddresses: []
       }
     })
 
