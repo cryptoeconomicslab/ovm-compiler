@@ -113,11 +113,12 @@ contract <%= claimDef.name %> {
             return getChild<%= claimDef.entryPoint %>(inputs, challengeInput);
         }
         bytes32 input0 = keccak256(utils.getInputValue(inputs[0]));
+        bytes[] memory subInputs = utils.subArray(inputs, 1, inputs.length);
 <%
   claimDef.contracts.forEach((property) => {
 -%>
         if(input0 == keccak256(<%= property.name %>)) {
-            return getChild<%= property.name %>(utils.subArray(inputs, 1, inputs.length), challengeInput);
+            return getChild<%= property.name %>(subInputs, challengeInput);
         }
 <%
   })
@@ -132,11 +133,12 @@ contract <%= claimDef.name %> {
             return decide<%= claimDef.entryPoint %>(_inputs, _witness);
         }
         bytes32 input0 = keccak256(utils.getInputValue(_inputs[0]));
+        bytes[] memory subInputs = utils.subArray(_inputs, 1, _inputs.length);
 <%
   claimDef.contracts.forEach((property) => {
 -%>
         if(input0 == keccak256(<%= property.name %>)) {
-            return decide<%= property.name %>(utils.subArray(_inputs, 1, _inputs.length), _witness);
+            return decide<%= property.name %>(subInputs, _witness);
         }
 <%
   })

@@ -13,12 +13,16 @@
                 inputs: childInputsOf0
             }));
 
+            return types.Property({
+                predicateAddress: notAddress,
+                inputs: notInputs
+            });
         }
         if(challengeInput == 1) {
             notInputs[0] = _inputs[1];
+            return types.Property({
+                predicateAddress: notAddress,
+                inputs: notInputs
+            });
         }
-        return types.Property({
-            predicateAddress: notAddress,
-            inputs: notInputs
-        });
     }

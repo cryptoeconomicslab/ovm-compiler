@@ -94,8 +94,9 @@ contract NotTest {
             return getChildNotTestN(inputs, challengeInput);
         }
         bytes32 input0 = keccak256(utils.getInputValue(inputs[0]));
+        bytes[] memory subInputs = utils.subArray(inputs, 1, inputs.length);
         if(input0 == keccak256(NotTestN)) {
-            return getChildNotTestN(utils.subArray(inputs, 1, inputs.length), challengeInput);
+            return getChildNotTestN(subInputs, challengeInput);
         }
     }
 
@@ -107,8 +108,9 @@ contract NotTest {
             return decideNotTestN(_inputs, _witness);
         }
         bytes32 input0 = keccak256(utils.getInputValue(_inputs[0]));
+        bytes[] memory subInputs = utils.subArray(_inputs, 1, _inputs.length);
         if(input0 == keccak256(NotTestN)) {
-            return decideNotTestN(utils.subArray(_inputs, 1, _inputs.length), _witness);
+            return decideNotTestN(subInputs, _witness);
         }
     }
 
