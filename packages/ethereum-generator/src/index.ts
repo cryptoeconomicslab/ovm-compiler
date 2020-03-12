@@ -2,6 +2,7 @@ import { Parser, Import } from '@cryptoeconomicslab/ovm-parser'
 import { EthereumCodeGenerator } from './EthereumCodeGenerator'
 import { transpile, ImportHandler } from '@cryptoeconomicslab/ovm-transpiler'
 import { SolidityCodeGeneratorOptions } from '@cryptoeconomicslab/ovm-solidity-generator'
+import * as helper from './helper'
 
 export async function generateEVMByteCode(
   source: string,
@@ -19,4 +20,4 @@ export async function generateEVMByteCode(
   const codeGenerator = new EthereumCodeGenerator(options)
   return codeGenerator.generate(compiledPredicates)
 }
-export { EthereumCodeGenerator }
+export { EthereumCodeGenerator, helper }
