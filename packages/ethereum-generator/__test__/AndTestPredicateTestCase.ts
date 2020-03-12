@@ -6,6 +6,7 @@ import {
   encodeProperty,
   encodeVariable,
   encodeInteger,
+  encodeChildWitnesses,
   TestCaseSet,
   TestContext
 } from '../src/helper'
@@ -69,7 +70,10 @@ export const createTestCaseOfAndLogicalConnective = (
         ) => {
           return {
             inputs: [encodeLabel('AndTestA'), transactionA, transactionB],
-            witnesses: ['0x', signature]
+            witnesses: [
+              encodeChildWitnesses([signature]),
+              encodeChildWitnesses([signature])
+            ]
           }
         }
       }
