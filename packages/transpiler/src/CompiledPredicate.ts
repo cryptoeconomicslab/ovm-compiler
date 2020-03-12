@@ -70,6 +70,7 @@ export interface VariablePredicateCall {
 }
 
 /**
+ * For predicates dynamic linking
  * e.g. Confsig() user defined predicate
  */
 export interface CompiledPredicateCall {

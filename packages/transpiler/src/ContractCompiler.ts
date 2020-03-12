@@ -177,6 +177,7 @@ function getPredicate(inputDefs: string[], name: string): PredicateCall {
     }
   } else if (utils.isUpperCase(name[0])) {
     if (utils.isCompiledPredicate(name)) {
+      // This is for calling user defined predicate dybamically
       return {
         type: 'CompiledPredicateCall',
         source: name

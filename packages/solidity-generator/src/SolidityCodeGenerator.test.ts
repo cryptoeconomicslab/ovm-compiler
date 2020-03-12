@@ -664,6 +664,7 @@ describe('SolidityCodeGenerator', () => {
       })
       expect(output).toBe(
         `        bytes[] memory inputs = new bytes[](0);
+        // This is for predicates dynamic linking
         require(
             CompiledPredicate(LibraryPredicate).decide(inputs, utils.subArray(_witness, 1, _witness.length)),
             "LibraryPredicate must be true"
@@ -883,6 +884,7 @@ describe('SolidityCodeGenerator', () => {
         uint256 challengeInput = abi.decode(challengeInputs[0], (uint256));
         bytes[] memory notInputs = new bytes[](1);
         if(challengeInput == 0) {
+            // This is for predicates dynamic linking
             bytes[] memory childInputs = new bytes[](0);
             return CompiledPredicate(CompiledPredicate).getChild(childInputs, utils.subArray(challengeInputs, 1, challengeInputs.length));
         }
