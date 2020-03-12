@@ -25,7 +25,7 @@ export interface IntermediateCompiledPredicate {
   name: string
   originalPredicateName: string
   // logical connective
-  connective: LogicalConnective
+  connective: LogicalConnective | LogicalConnectiveStrings
   inputDefs: string[]
   inputs: (AtomicProposition | Placeholder)[]
   propertyInputs: NormalInput[]
