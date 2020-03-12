@@ -176,9 +176,16 @@ function getPredicate(inputDefs: string[], name: string): PredicateCall {
       }
     }
   } else if (utils.isUpperCase(name[0])) {
-    return {
-      type: 'AtomicPredicateCall',
-      source: name
+    if (utils.isCompiledPredicate(name)) {
+      return {
+        type: 'CompiledPredicateCall',
+        source: name
+      }
+    } else {
+      return {
+        type: 'AtomicPredicateCall',
+        source: name
+      }
     }
   } else {
     return {
@@ -332,7 +339,7 @@ function getConstants(
   predicates.forEach(p => {
     p.inputs.forEach(i => {
       if (typeof i != 'string' && i.type == 'AtomicProposition') {
-        if (i.predicate.type == 'AtomicPredicateCall' && !i.isCompiled) {
+        if (i.predicate.type == 'CompiledPredicateCall' && !i.isCompiled) {
           const predicateName = i.predicate.source
           if (
             utils.isCompiledPredicate(predicateName) &&

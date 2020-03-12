@@ -21,8 +21,15 @@
 <%  } else { -%>
         bytes[] memory <%= valName %> = new bytes[](<%= property.inputs.length %>);
 <%- include('constructInputs', {property: property, valName: valName, witnessName: '_witness[0]'}) -%>
+<%    if(property.predicate.type == 'CompiledPredicateCall') { -%>
+        require(
+            CompiledPredicate(<%= property.predicate.source %>).decide(<%= valName %>, utils.subArray(_witness, 1, _witness.length)),
+            "<%= property.predicate.source %> must be true"
+        );
+<%  } else { -%>
         require(
             AtomicPredicate(<%= property.predicate.source %>).decide(<%= valName %>),
             "<%= property.predicate.source %> must be true"
         );
+<%  } -%>
 <%  } -%>
