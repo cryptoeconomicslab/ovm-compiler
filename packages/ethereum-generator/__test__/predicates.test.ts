@@ -6,12 +6,14 @@ import * as ethers from 'ethers'
 import { TestCaseSet, setUpCompiledPredicateTest } from '../src/helper'
 import { createTestCaseOfAndLogicalConnective } from './AndTestPredicateTestCase'
 import { createTestCaseOfForAllSuchThatQuantifier } from './ForTestPredicateTestCase'
+import { createTestCaseOfDynamicLink } from './DynamicLinkTestCase'
 
 const createTestCases: (wallet: ethers.Wallet) => TestCaseSet[] = (
   wallet: ethers.Wallet
 ) => [
   createTestCaseOfAndLogicalConnective(wallet),
-  createTestCaseOfForAllSuchThatQuantifier(wallet)
+  createTestCaseOfForAllSuchThatQuantifier(wallet),
+  createTestCaseOfDynamicLink(wallet)
 ]
 
 setUpCompiledPredicateTest(
