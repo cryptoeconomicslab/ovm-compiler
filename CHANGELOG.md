@@ -3,6 +3,14 @@
 
 
 
+## <small>0.2.11 (2020-03-13)</small>
+
+* downgrade ethereum-waffle to 2.1.x ([0bc1e6d](https://github.com/cryptoeconomicslab/ovm-compiler/commit/0bc1e6d))
+* update changelog ([39908d8](https://github.com/cryptoeconomicslab/ovm-compiler/commit/39908d8))
+* v0.2.11 ([073fc2e](https://github.com/cryptoeconomicslab/ovm-compiler/commit/073fc2e))
+
+
+
 ## <small>0.2.10 (2020-03-13)</small>
 
 * add comment ([d05d8b7](https://github.com/cryptoeconomicslab/ovm-compiler/commit/d05d8b7))
