@@ -1,6 +1,6 @@
 {
   "name": "@cryptoeconomicslab/ovm-ethereum-generator",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "description": "OVM evm bytecode generator",
   "author": {
     "name": "Cryptoeconomics Lab",
@@ -39,7 +39,7 @@
     "tslib": "^1.10.0"
   },
   "devDependencies": {
-    "@cryptoeconomicslab/ovm-ethereum-generator": "^0.2.10",
+    "@cryptoeconomicslab/ovm-ethereum-generator": "^0.2.11",
     "@cryptoeconomicslab/ovm-parser": "^0.2.5",
     "@cryptoeconomicslab/ovm-transpiler": "^0.2.9",
     "@types/chai": "^4.2.5",
