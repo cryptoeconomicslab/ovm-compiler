@@ -1,6 +1,11 @@
 import chai from 'chai'
 import { ethers } from 'ethers'
-import { createMockProvider, deployContract, solidity } from 'ethereum-waffle'
+import {
+  createMockProvider,
+  deployContract,
+  solidity,
+  getWallets
+} from 'ethereum-waffle'
 import { randomAddress, deployCompiledPredicate } from '.'
 import { TestCaseSet, TestContext } from './testCase'
 
@@ -23,7 +28,7 @@ export function setUpCompiledPredicateTest(
 ) {
   describe(name, () => {
     let provider = createMockProvider()
-    let wallets = provider.getWallets()
+    let wallets = getWallets(provider)
     let wallet = wallets[0]
     const notAddress = randomAddress()
     const andAddress = randomAddress()
