@@ -1,5 +1,32 @@
-## <small>0.1.17 (2020-02-07)</small>
+## <small>0.1.17 (2020-03-13)</small>
 
+
+
+
+## <small>0.2.10 (2020-03-13)</small>
+
+* add comment ([d05d8b7](https://github.com/cryptoeconomicslab/ovm-compiler/commit/d05d8b7))
+* add view notation to generated getChild and isValidChallenge ([dffaa40](https://github.com/cryptoeconomicslab/ovm-compiler/commit/dffaa40))
+* change method name getTestCase to getTestData ([b39a1a2](https://github.com/cryptoeconomicslab/ovm-compiler/commit/b39a1a2))
+* clean compile ([623da87](https://github.com/cryptoeconomicslab/ovm-compiler/commit/623da87))
+* fix IntermediateCompiledPredicate connective type ([5ac1506](https://github.com/cryptoeconomicslab/ovm-compiler/commit/5ac1506))
+* make extraArgs function ([4086cc0](https://github.com/cryptoeconomicslab/ovm-compiler/commit/4086cc0))
+* make gasLimit option ([16b9b71](https://github.com/cryptoeconomicslab/ovm-compiler/commit/16b9b71))
+* make setUpTest function to reuse setup logic ([34dd0d3](https://github.com/cryptoeconomicslab/ovm-compiler/commit/34dd0d3))
+* merge solidity-generator-test into ethereum-generator ([c9e33bc](https://github.com/cryptoeconomicslab/ovm-compiler/commit/c9e33bc))
+* Passing witness to children of And logical connective ([befec77](https://github.com/cryptoeconomicslab/ovm-compiler/commit/befec77))
+* reduce contract size ([66d9170](https://github.com/cryptoeconomicslab/ovm-compiler/commit/66d9170))
+* rename predicate-examples to solidity-generator-test ([7bc804e](https://github.com/cryptoeconomicslab/ovm-compiler/commit/7bc804e))
+* Support CompiledPredicateCall ([cf964e5](https://github.com/cryptoeconomicslab/ovm-compiler/commit/cf964e5))
+* support multiple predicate contacts ([2ba4052](https://github.com/cryptoeconomicslab/ovm-compiler/commit/2ba4052))
+* update changelog ([6c4fde9](https://github.com/cryptoeconomicslab/ovm-compiler/commit/6c4fde9))
+* v0.2.10 ([916daaf](https://github.com/cryptoeconomicslab/ovm-compiler/commit/916daaf))
+* test(ethereum-generator): add test of predicates dynamic linking ([51591b3](https://github.com/cryptoeconomicslab/ovm-compiler/commit/51591b3))
+* chore(ethereum-generator): add comments and chore naming ([cad4d49](https://github.com/cryptoeconomicslab/ovm-compiler/commit/cad4d49))
+* clean(predicate-examples): clean code ([ad6599b](https://github.com/cryptoeconomicslab/ovm-compiler/commit/ad6599b))
+* clean(solidity-generator-test): export test utilities ([28d6562](https://github.com/cryptoeconomicslab/ovm-compiler/commit/28d6562))
+* fix(solidity-generator): fix getChild return invalid inputs in nested children case ([af9ea00](https://github.com/cryptoeconomicslab/ovm-compiler/commit/af9ea00))
+* feat(predicate-examples): add predicate-examples module ([229508b](https://github.com/cryptoeconomicslab/ovm-compiler/commit/229508b))
 
 
 
