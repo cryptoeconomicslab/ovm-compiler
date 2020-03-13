@@ -33,6 +33,66 @@ https://ovm-compiler.netlify.com
 npm test
 ```
 
+## Developers
+
+### ovm-transpiler
+
+This section describes 3 steps in OVM transpiler.
+
+1. Static link
+
+The transpiler links static library. Libraries should be defined by `@library` annotation.
+
+```
+@library
+def StaticLibraryPredicate(a) := ...
+
+def MainPredicate(a, b) := StaticLibraryPredicate(a) and ...
+```
+
+2. Quantifier elimination
+
+Quantifiers should be defined by `@quantifier` annotation.
+
+```
+@library
+@quantifier("hint data")
+def StaticLibraryQuantifier(v, b) := ...
+
+def MainPredicate(a, b) := StaticLibraryPredicate(b).any(v -> ...)
+```
+
+The transpiler transform a proposition to the proposition whose quantifiers are eliminated.
+THe elimination rule table is this.
+
+| original proposition    | eliminated                                  |
+| ----------------------- | ------------------------------------------- |
+| ∀b∈Quantifier(a):Foo(b) | ∀b∈Bytes(a):Not(Quantifier(b, a)) or Foo(b) |
+| ∃b∈Quantifier(a):Foo(b) | ∃b∈Bytes(a):Quantifier(b, a) and Foo(b)     |
+
+3. Compilation
+
+In this process, the transpiler subdivides a proposition to propositions.
+Show example.
+
+Original
+
+```
+def MainPredicate(b) :=
+StaticLibraryPredicate(b).any(v -> Foo(v) and Bar(v))
+```
+
+Compiled
+
+```
+def MainPredicateT(b) :=
+StaticLibraryPredicateT(b).any(v -> MainPredicateTA(v))
+
+def MainPredicateTA(b) :=
+Foo(v) and Bar(v)
+
+```
+
 ## Roadmap
 
 - [x] Plasma checkpoint example
@@ -48,4 +108,3 @@ npm test
 - [x] add byte code generator for ethereum
 - [ ] add code generator for Substrate
 - [ ] update language to write state transition
-
