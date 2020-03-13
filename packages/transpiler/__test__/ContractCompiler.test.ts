@@ -723,5 +723,73 @@ describe('ContractCompiler', () => {
         ])
       })
     })
+    describe('library', () => {
+      test('decide other compiled predicates', () => {
+        const input: PropertyDef[] = [
+          {
+            annotations: [],
+            name: 'libraryTest',
+            inputDefs: ['a', 'b'],
+            body: {
+              type: 'PropertyNode',
+              predicate: 'And',
+              inputs: [
+                {
+                  type: 'PropertyNode',
+                  predicate: 'LibraryPredicate',
+                  inputs: ['a']
+                },
+                { type: 'PropertyNode', predicate: 'Foo', inputs: [] }
+              ]
+            }
+          }
+        ]
+        const output = createCompiledPredicates(input)
+        expect(output).toStrictEqual([
+          {
+            type: 'CompiledPredicate',
+            name: 'LibraryTest',
+            inputDefs: ['a', 'b'],
+            contracts: [
+              {
+                type: 'IntermediateCompiledPredicate',
+                originalPredicateName: 'LibraryTest',
+                name: 'LibraryTestA',
+                connective: LogicalConnective.And,
+                inputDefs: ['LibraryTestA', 'a', 'b'],
+                inputs: [
+                  {
+                    type: 'AtomicProposition',
+                    predicate: {
+                      type: 'CompiledPredicateCall',
+                      source: 'LibraryPredicate'
+                    },
+                    inputs: [
+                      { type: 'NormalInput', inputIndex: 1, children: [] }
+                    ]
+                  },
+                  {
+                    type: 'AtomicProposition',
+                    predicate: {
+                      type: 'AtomicPredicateCall',
+                      source: 'Foo'
+                    },
+                    inputs: []
+                  }
+                ],
+                propertyInputs: []
+              }
+            ],
+            constants: [
+              {
+                name: 'LibraryPredicate',
+                varType: 'address'
+              }
+            ],
+            entryPoint: 'LibraryTestA'
+          }
+        ])
+      })
+    })
   })
 })

@@ -28,6 +28,11 @@
             bytes[] memory childInputs = new bytes[](<%= item.inputs.length %>);
 <%- indent(include('constructInputs', {property: item, valName: 'childInputs', witnessName: 'challengeInputs[0]'}), 4) -%>
             return getChild(childInputs, utils.subArray(challengeInputs, 1, challengeInputs.length));
+<%      } else if(item.predicate.type == 'CompiledPredicateCall') { -%>
+            // This is for predicates dynamic linking
+            bytes[] memory childInputs = new bytes[](<%= item.inputs.length %>);
+<%- indent(include('constructInputs', {property: item, valName: 'childInputs', witnessName: 'challengeInputs[0]'}), 4) -%>
+            return CompiledPredicate(<%= item.predicate.source %>).getChild(childInputs, utils.subArray(challengeInputs, 1, challengeInputs.length));
 <%      } else { -%>
 <%-  indent(include('constructProperty', {property: item, valName: 'notInputs[0]', propIndex: j, freeVariable: false}), 4) -%>
             return types.Property({

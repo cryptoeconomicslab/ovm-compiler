@@ -44,6 +44,7 @@ export type PredicateCall =
   | AtomicPredicateCall
   | InputPredicateCall
   | VariablePredicateCall
+  | CompiledPredicateCall
 
 /**
  * e.g. IsValidSignature()
@@ -66,6 +67,15 @@ export interface InputPredicateCall {
  */
 export interface VariablePredicateCall {
   type: 'VariablePredicateCall'
+}
+
+/**
+ * For predicates dynamic linking
+ * e.g. Confsig() user defined predicate
+ */
+export interface CompiledPredicateCall {
+  type: 'CompiledPredicateCall'
+  source: string
 }
 
 /**

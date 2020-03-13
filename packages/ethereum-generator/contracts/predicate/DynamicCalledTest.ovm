@@ -1,0 +1,1 @@
+def DynamicCalledTest(a, b, c) := IsValidSignature(a, b, c) and IsValidSignature(a, b, c)

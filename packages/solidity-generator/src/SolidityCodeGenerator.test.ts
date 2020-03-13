@@ -649,6 +649,30 @@ describe('SolidityCodeGenerator', () => {
       )
     })
 
+    test('CompiledPredicateCall', async () => {
+      const input: AtomicProposition = {
+        type: 'AtomicProposition',
+        predicate: {
+          type: 'CompiledPredicateCall',
+          source: 'LibraryPredicate'
+        },
+        inputs: []
+      }
+      const output = generator.includeCallback('decideProperty', {
+        property: input,
+        valName: 'inputs'
+      })
+      expect(output).toBe(
+        `        bytes[] memory inputs = new bytes[](0);
+        // This is for predicates dynamic linking
+        require(
+            CompiledPredicate(LibraryPredicate).decide(inputs, utils.subArray(_witness, 1, _witness.length)),
+            "LibraryPredicate must be true"
+        );
+`
+      )
+    })
+
     test('InputPredicateCall', async () => {
       const input: AtomicProposition = {
         type: 'AtomicProposition',
@@ -819,6 +843,65 @@ describe('SolidityCodeGenerator', () => {
       })
       expect(output).toBe(
         `        inputs = challengeInputs[0];
+`
+      )
+    })
+  })
+
+  describe('getChild', () => {
+    test('CompiledPredicateCall', async () => {
+      const input: IntermediateCompiledPredicate = {
+        type: 'IntermediateCompiledPredicate',
+        originalPredicateName: 'CompiledPredicateCallTest',
+        name: 'CompiledPredicateCallTestA',
+        connective: LogicalConnective.And,
+        inputDefs: ['CompiledPredicateCallTestA', 'a'],
+        inputs: [
+          {
+            type: 'AtomicProposition',
+            predicate: {
+              type: 'CompiledPredicateCall',
+              source: 'CompiledPredicate'
+            },
+            inputs: []
+          },
+          {
+            type: 'AtomicProposition',
+            predicate: { type: 'AtomicPredicateCall', source: 'Foo' },
+            inputs: []
+          }
+        ],
+        propertyInputs: []
+      }
+      const output = generator.includeCallback('getChild', {
+        property: input
+      })
+      expect(output).toBe(
+        `    /**
+     * Gets child of CompiledPredicateCallTestA(CompiledPredicateCallTestA,a).
+     */
+    function getChildCompiledPredicateCallTestA(bytes[] memory _inputs, bytes[] memory challengeInputs) private view returns (types.Property memory) {
+        uint256 challengeInput = abi.decode(challengeInputs[0], (uint256));
+        bytes[] memory notInputs = new bytes[](1);
+        if(challengeInput == 0) {
+            // This is for predicates dynamic linking
+            bytes[] memory childInputs = new bytes[](0);
+            return CompiledPredicate(CompiledPredicate).getChild(childInputs, utils.subArray(challengeInputs, 1, challengeInputs.length));
+        }
+        if(challengeInput == 1) {
+            bytes[] memory childInputsOf1 = new bytes[](0);
+
+            notInputs[0] = abi.encode(types.Property({
+                predicateAddress: Foo,
+                inputs: childInputsOf1
+            }));
+
+            return types.Property({
+                predicateAddress: notAddress,
+                inputs: notInputs
+            });
+        }
+    }
 `
       )
     })
