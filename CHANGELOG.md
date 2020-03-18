@@ -1,5 +1,14 @@
-## <small>0.1.17 (2020-03-13)</small>
+## <small>0.1.17 (2020-03-18)</small>
 
+
+
+
+## <small>0.2.12 (2020-03-18)</small>
+
+* update changelog ([ebee024](https://github.com/cryptoeconomicslab/ovm-compiler/commit/ebee024))
+* update dependency ([f978943](https://github.com/cryptoeconomicslab/ovm-compiler/commit/f978943))
+* v0.2.12 ([03c6663](https://github.com/cryptoeconomicslab/ovm-compiler/commit/03c6663))
+* chore(deps): bump acorn from 5.7.3 to 5.7.4 ([e4a7439](https://github.com/cryptoeconomicslab/ovm-compiler/commit/e4a7439))
 
 
 
