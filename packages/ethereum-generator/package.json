@@ -36,17 +36,17 @@
     "@cryptoeconomicslab/ovm-solidity-generator": "^0.2.10",
     "@cryptoeconomicslab/ovm-transpiler": "^0.2.10",
     "solc": "^0.5.15",
-    "tslib": "^1.10.0"
+    "tslib": "^1.11.1"
   },
   "devDependencies": {
     "@cryptoeconomicslab/ovm-ethereum-generator": "^0.2.11",
     "@cryptoeconomicslab/ovm-parser": "^0.2.5",
     "@cryptoeconomicslab/ovm-transpiler": "^0.2.9",
-    "@types/chai": "^4.2.5",
+    "@types/chai": "^4.2.11",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "ethereum-waffle": "~2.1.2",
-    "ethers": "^4.0.33",
-    "mocha": "^6.2.0"
+    "ethers": "^4.0.46",
+    "mocha": "^7.1.0"
   }
 }
