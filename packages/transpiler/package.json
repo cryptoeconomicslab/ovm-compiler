@@ -48,10 +48,15 @@
     }
   },
   "dependencies": {
-    "@cryptoeconomicslab/coder": "0.0.36",
-    "@cryptoeconomicslab/context": "0.0.36",
+    "@cryptoeconomicslab/coder": "^0.0.36",
+    "@cryptoeconomicslab/context": "^0.0.36",
     "@cryptoeconomicslab/ovm-parser": "^0.2.5",
-    "@cryptoeconomicslab/primitives": "0.0.36",
     "tslib": "^1.11.1"
+  },
+  "devDependencies": {
+    "@cryptoeconomicslab/primitives": "^0.0.36"
+  },
+  "peerDependencies": {
+    "@cryptoeconomicslab/primitives": "^0.0.36"
   }
 }
