@@ -3,6 +3,14 @@
 
 
 
+## <small>0.2.13 (2020-03-18)</small>
+
+* make primitives peer dependency ([63b4052](https://github.com/cryptoeconomicslab/ovm-compiler/commit/63b4052))
+* update changelog ([bfe0a85](https://github.com/cryptoeconomicslab/ovm-compiler/commit/bfe0a85))
+* v0.2.13 ([17cbb9e](https://github.com/cryptoeconomicslab/ovm-compiler/commit/17cbb9e))
+
+
+
 ## <small>0.2.12 (2020-03-18)</small>
 
 * update changelog ([ebee024](https://github.com/cryptoeconomicslab/ovm-compiler/commit/ebee024))
