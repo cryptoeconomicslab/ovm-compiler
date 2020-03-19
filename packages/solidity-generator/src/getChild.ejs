@@ -86,12 +86,19 @@
 <%
         property.inputs.forEach((item, index) => {
 -%>
+<%        
+          const innerProperty = getInnerPredicateOfNot(item, predicates);
+          if(!!innerProperty) { %>
+        // replace not(not(p))
+        andInputs[<%= index %>] = abi.encode(getChild<%= innerProperty.name %>(_inputs, challengeInputs));
+<%        } else { -%>
         bytes[] memory notInputs<%= index %> = new bytes[](1);
 <%-  include('constructProperty', {property: item, valName: 'notInputs' + index + '[0]', propIndex: index, freeVariable: false}) -%>
         andInputs[<%= index %>] = abi.encode(types.Property({
             predicateAddress: notAddress,
             inputs: notInputs<%= index %>
         }));
+<%        } -%>
 <%      }) -%>
         return types.Property({
             predicateAddress: andAddress,

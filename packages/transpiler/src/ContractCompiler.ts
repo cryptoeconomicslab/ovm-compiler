@@ -9,7 +9,8 @@ import {
   NormalInput,
   ConstantVariable,
   convertStringToLogicalConnective,
-  LogicalConnectiveStrings
+  LogicalConnectiveStrings,
+  LogicalConnective
 } from './CompiledPredicate'
 import { PropertyDef, PropertyNode } from '@cryptoeconomicslab/ovm-parser'
 
@@ -40,10 +41,39 @@ function calculateInteractiveNodesPerProperty(
     contracts: newContracts,
     entryPoint: newContracts[newContracts.length - 1].name
   }
+  addPropertyInputs(result)
   if (constants.length > 0) {
     result.constants = constants
   }
   return result
+}
+
+/**
+ *
+ */
+function addPropertyInputs(compiledPredicate: CompiledPredicate) {
+  compiledPredicate.contracts.forEach(c => {
+    if (c.connective === LogicalConnective.Or) {
+      c.inputs.forEach(i => {
+        if (typeof i !== 'string') {
+          if (i.predicate.type == 'AtomicPredicateCall') {
+            const innerPredicate = getPredicate(i.predicate.source)
+            if (
+              innerPredicate &&
+              innerPredicate.connective === LogicalConnective.Not
+            ) {
+              c.propertyInputs = c.propertyInputs.concat(
+                innerPredicate.propertyInputs
+              )
+            }
+          }
+        }
+      })
+    }
+  })
+  function getPredicate(predicateName: string) {
+    return compiledPredicate.contracts.find(p => p.name == predicateName)
+  }
 }
 
 /**

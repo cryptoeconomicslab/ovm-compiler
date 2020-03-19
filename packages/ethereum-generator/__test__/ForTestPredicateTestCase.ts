@@ -35,18 +35,8 @@ export const createTestCaseOfForAllSuchThatQuantifier = (
               predicateAddress: context.and,
               inputs: [
                 encodeProperty({
-                  predicateAddress: context.not,
-                  inputs: [
-                    encodeProperty({
-                      predicateAddress: forTestPredicate.address,
-                      inputs: [
-                        encodeLabel('ForTestFO1N'),
-                        transactionA,
-                        transactionB,
-                        signature
-                      ]
-                    })
-                  ]
+                  predicateAddress: context.mockAtomicPredicate,
+                  inputs: [transactionA, transactionB, signature]
                 }),
                 encodeProperty({
                   predicateAddress: context.not,
