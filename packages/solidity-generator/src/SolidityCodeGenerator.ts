@@ -85,18 +85,20 @@ export class SolidityCodeGenerator implements CodeGenerator {
       })
       .join('\n')
   }
-  getInnerPredicateOfNot = (
+  /**
+   * isAtomicPropositionNot method check providing atomicProposition is the CompiledPredicate which has Not logical connective.
+   * @returns return true if atomicProposition is CompiledPredicate which has not connective, otherwise return false.
+   */
+  isAtomicPropositionNot = (
     atomicProposition: AtomicProposition,
     predicates: IntermediateCompiledPredicate[]
-  ) => {
+  ): boolean => {
     const predicateName = (atomicProposition.predicate as AtomicPredicateCall)
       .source
     const innerPredicate = this.getProperty(predicateName, predicates)
-    if (innerPredicate && innerPredicate.connective === LogicalConnective.Not) {
-      return innerPredicate
-    } else {
-      return null
-    }
+    return (
+      !!innerPredicate && innerPredicate.connective === LogicalConnective.Not
+    )
   }
   getProperty = (
     predicateName: string,
@@ -109,7 +111,7 @@ export class SolidityCodeGenerator implements CodeGenerator {
       getAddress: this.getAddress,
       indent: this.indent,
       getOVMPath: this.getOVMPath,
-      getInnerPredicateOfNot: this.getInnerPredicateOfNot
+      isAtomicPropositionNot: this.isAtomicPropositionNot
     }
   }
 }
