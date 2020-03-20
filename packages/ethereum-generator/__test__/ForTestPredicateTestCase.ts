@@ -27,10 +27,12 @@ export const createTestCaseOfForAllSuchThatQuantifier = (
         ) => {
           return {
             challengeInputs: [signature, '0x'],
+            // ForTestF(a, b)
             property: {
               predicateAddress: forTestPredicate.address,
               inputs: [encodeLabel('ForTestF'), transactionA, transactionB]
             },
+            // IsValidSignature(a, b, c) and !IsValidSignature(a, b, c)
             challenge: {
               predicateAddress: context.and,
               inputs: [

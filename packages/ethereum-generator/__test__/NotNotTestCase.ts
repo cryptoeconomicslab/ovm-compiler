@@ -25,6 +25,7 @@ export const createTestCaseOfNotNotP = (wallet: ethers.Wallet) => {
         ) => {
           return {
             challengeInputs: ['0x'],
+            // NotNotTestO(a, b, c)
             property: {
               predicateAddress: notNotTestPredicate.address,
               inputs: [
@@ -34,6 +35,7 @@ export const createTestCaseOfNotNotP = (wallet: ethers.Wallet) => {
                 signature
               ]
             },
+            // NotNotTestO1N1T(b, c) and !IsValidSignature(a, b, c)
             challenge: {
               predicateAddress: context.and,
               inputs: [

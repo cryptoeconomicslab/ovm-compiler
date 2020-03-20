@@ -86,10 +86,9 @@
 <%
         property.inputs.forEach((item, index) => {
 -%>
-<%        
-          const innerProperty = getInnerPredicateOfNot(item, predicates);
-          if(!!innerProperty) { %>
-        // replace not(not(p))
+<%
+          if(isAtomicPropositionNot(item, predicates)) { %>
+        // Replacing not(not(p)) to p
         bytes[] memory childInputs = new bytes[](<%= item.inputs.length %>);
 <%- include('constructInputs', {property: item, valName: 'childInputs', witnessName: 'challengeInputs[0]'}) -%>
         andInputs[<%= index %>] = abi.encode(getChild(childInputs, challengeInputs));
