@@ -18,7 +18,7 @@ export const createTestCaseOfNotNotP = (wallet: ethers.Wallet) => {
     validChallenges: [
       {
         name:
-          'valid challenge of NotNotTestO(a, b, c) should be NotNotTestO1N1T(a, b, c) and !IsValidSignature(a, b, c)',
+          'valid challenge of NotNotTestO(a, b, c) should be NotNotTestO1N1T(b, c) and !IsValidSignature(a, b, c)',
         getTestData: (
           notNotTestPredicate: ethers.Contract,
           context: TestContext
@@ -41,8 +41,8 @@ export const createTestCaseOfNotNotP = (wallet: ethers.Wallet) => {
                   predicateAddress: notNotTestPredicate.address,
                   inputs: [
                     encodeLabel('NotNotTestO1N1T'),
-                    transactionA,
-                    transactionB
+                    transactionB,
+                    signature
                   ]
                 }),
                 encodeProperty({
