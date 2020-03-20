@@ -27,26 +27,18 @@ export const createTestCaseOfForAllSuchThatQuantifier = (
         ) => {
           return {
             challengeInputs: [signature, '0x'],
+            // ForTestF(a, b)
             property: {
               predicateAddress: forTestPredicate.address,
               inputs: [encodeLabel('ForTestF'), transactionA, transactionB]
             },
+            // IsValidSignature(a, b, c) and !IsValidSignature(a, b, c)
             challenge: {
               predicateAddress: context.and,
               inputs: [
                 encodeProperty({
-                  predicateAddress: context.not,
-                  inputs: [
-                    encodeProperty({
-                      predicateAddress: forTestPredicate.address,
-                      inputs: [
-                        encodeLabel('ForTestFO1N'),
-                        transactionA,
-                        transactionB,
-                        signature
-                      ]
-                    })
-                  ]
+                  predicateAddress: context.mockAtomicPredicate,
+                  inputs: [transactionA, transactionB, signature]
                 }),
                 encodeProperty({
                   predicateAddress: context.not,

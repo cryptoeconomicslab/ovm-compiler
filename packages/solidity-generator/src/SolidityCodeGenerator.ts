@@ -7,7 +7,14 @@ import constructInputs from './constructInputs'
 import constructInput from './constructInput'
 import decideProperty from './decideProperty'
 import { CodeGenerator } from '@cryptoeconomicslab/ovm-generator'
-import { CompiledPredicate } from '@cryptoeconomicslab/ovm-transpiler'
+import {
+  CompiledPredicate,
+  IntermediateCompiledPredicate,
+  LogicalConnective,
+  AtomicProposition,
+  AtomicPredicateCall,
+  PredicateCall
+} from '@cryptoeconomicslab/ovm-transpiler'
 
 const templates: { [key: string]: string } = {
   decide: decide.toString(),
@@ -78,11 +85,27 @@ export class SolidityCodeGenerator implements CodeGenerator {
       })
       .join('\n')
   }
+  /**
+   * isAtomicPropositionNot method check providing atomicProposition is the CompiledPredicate which has Not logical connective.
+   * @returns return true if atomicProposition is CompiledPredicate which has not connective, otherwise return false.
+   */
+  isAtomicPropositionNot = (
+    atomicProposition: AtomicProposition,
+    predicates: IntermediateCompiledPredicate[]
+  ): boolean => {
+    const predicateName = (atomicProposition.predicate as AtomicPredicateCall)
+      .source
+    const innerPredicate = predicates.find(p => p.name == predicateName)
+    return (
+      !!innerPredicate && innerPredicate.connective === LogicalConnective.Not
+    )
+  }
   getHelpers = () => {
     return {
       getAddress: this.getAddress,
       indent: this.indent,
-      getOVMPath: this.getOVMPath
+      getOVMPath: this.getOVMPath,
+      isAtomicPropositionNot: this.isAtomicPropositionNot
     }
   }
 }

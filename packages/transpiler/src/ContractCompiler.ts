@@ -9,7 +9,8 @@ import {
   NormalInput,
   ConstantVariable,
   convertStringToLogicalConnective,
-  LogicalConnectiveStrings
+  LogicalConnectiveStrings,
+  LogicalConnective
 } from './CompiledPredicate'
 import { PropertyDef, PropertyNode } from '@cryptoeconomicslab/ovm-parser'
 

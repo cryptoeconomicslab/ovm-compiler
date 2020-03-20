@@ -1,0 +1,5 @@
+@library
+@quantifier("signatures,KEY,${m}")
+def SignedBy(sig, m, signer) := IsValidSignature(m, signer, sig)
+
+def notNotTest(a, b, c) := !(SignedBy(b, c).any()) or IsValidSignature(a, b, c)

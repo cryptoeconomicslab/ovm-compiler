@@ -157,7 +157,7 @@ contract <%= claimDef.name %> {
 <%
   claimDef.contracts.forEach((property) => {
 -%>
-<%- include('getChild', {property: property}); -%>
+<%- include('getChild', {property: property, predicates: claimDef.contracts}); -%>
 <%
   })
 -%>
