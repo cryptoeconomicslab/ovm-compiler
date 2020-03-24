@@ -253,12 +253,24 @@ function createTranslator(
       p.inputs[0] = translated.hint
       if (translated.property) {
         if (originalChildren.length == 1) {
-          p.inputs[2] = {
-            type: 'PropertyNode',
-            predicate: 'And',
-            inputs: [translate(translated.property)].concat(originalChildren)
+          // Q.any(v -> ...)
+          if (originalChildren[0].predicate == 'And') {
+            p.inputs[2] = {
+              type: 'PropertyNode',
+              predicate: 'And',
+              inputs: [translate(translated.property)].concat(
+                originalChildren[0].inputs as PropertyNode[]
+              )
+            }
+          } else {
+            p.inputs[2] = {
+              type: 'PropertyNode',
+              predicate: 'And',
+              inputs: [translate(translated.property)].concat(originalChildren)
+            }
           }
         } else {
+          // Q.any()
           p.inputs[2] = translate(translated.property)
         }
       }
