@@ -455,5 +455,28 @@ def Tx(tx, token, range, block) := IsTx(tx, token, range, block)
         })
       }
     })
+
+    test('not quantifier', () => {
+      const library: PropertyDef = {
+        annotations: [
+          {
+            type: 'Annotation',
+            body: {
+              name: 'library',
+              args: []
+            }
+          }
+        ],
+        name: 'FooLib',
+        inputDefs: ['v', 'a', 'b'],
+        body: {
+          type: 'PropertyNode',
+          predicate: 'Foo',
+          inputs: ['a', 'v', 'b']
+        }
+      }
+      const preset = createQuantifierPreset(library)
+      expect(preset).toBeNull()
+    })
   })
 })
